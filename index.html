@@ -73,17 +73,17 @@ body{
   background:linear-gradient(160deg,#f0f5f0,#e8f2f4 35%,#f5f7ee 70%,#faf8f0)}
 
 /* ---------- LAYER 2, ORBS ---------- */
-.orb{position:fixed;border-radius:50%;filter:blur(52px);z-index:-2;pointer-events:none;will-change:transform}
-#o1{width:24vmax;height:24vmax;left:-7vmax;top:-9vmax;opacity:.50;background:var(--mb-green);animation:roam1 13s ease-in-out infinite alternate}
-#o2{width:22vmax;height:22vmax;right:-6vmax;top:5vmax;opacity:.44;background:var(--mb-sage);animation:roam2 15s ease-in-out infinite alternate}
-#o3{width:19vmax;height:19vmax;left:10vw;top:62vh;opacity:.38;background:var(--mb-yellow);animation:roam3 11s ease-in-out infinite alternate}
-#o4{width:20vmax;height:20vmax;right:1vw;bottom:-7vmax;opacity:.34;background:var(--mb-coral);animation:roam4 14s ease-in-out infinite alternate}
-#o5{width:15vmax;height:15vmax;left:44vw;top:26vh;opacity:.26;background:var(--mb-amber);animation:roam5 12s ease-in-out infinite alternate}
-@keyframes roam1{to{transform:translate3d(7vw,6vh,0) scale(1.14)}}
-@keyframes roam2{to{transform:translate3d(-6vw,9vh,0) scale(1.09)}}
-@keyframes roam3{to{transform:translate3d(5vw,-7vh,0) scale(1.12)}}
-@keyframes roam4{to{transform:translate3d(-7vw,-5vh,0) scale(1.1)}}
-@keyframes roam5{to{transform:translate3d(-4vw,8vh,0) scale(1.16)}}
+.orb{position:fixed;border-radius:50%;filter:blur(52px);z-index:-2;pointer-events:none;will-change:top,left}
+#o1{width:520px;height:520px;opacity:.55;background:radial-gradient(circle,var(--mb-green) 0%,transparent 70%);animation:roam1 12s ease-in-out infinite}
+#o2{width:440px;height:440px;opacity:.42;background:radial-gradient(circle,var(--mb-teal) 0%,transparent 70%);animation:roam2 15s ease-in-out infinite}
+#o3{width:400px;height:400px;opacity:.40;background:radial-gradient(circle,var(--mb-amber) 0%,transparent 70%);animation:roam3 11s ease-in-out infinite}
+#o4{width:340px;height:340px;opacity:.36;background:radial-gradient(circle,var(--mb-coral) 0%,transparent 70%);animation:roam4 13s ease-in-out infinite}
+#o5{width:300px;height:300px;opacity:.32;background:radial-gradient(circle,var(--mb-sage) 0%,transparent 70%);animation:roam5 14s ease-in-out infinite}
+@keyframes roam1{0%{top:-10vh;left:-8vw}25%{top:20vh;left:55vw}50%{top:60vh;left:15vw}75%{top:30vh;left:75vw}100%{top:-10vh;left:-8vw}}
+@keyframes roam2{0%{top:10vh;left:70vw}25%{top:55vh;left:30vw}50%{top:5vh;left:10vw}75%{top:70vh;left:65vw}100%{top:10vh;left:70vw}}
+@keyframes roam3{0%{top:65vh;left:5vw}25%{top:10vh;left:40vw}50%{top:50vh;left:70vw}75%{top:80vh;left:25vw}100%{top:65vh;left:5vw}}
+@keyframes roam4{0%{top:75vh;left:60vw}25%{top:20vh;left:80vw}50%{top:45vh;left:20vw}75%{top:10vh;left:50vw}100%{top:75vh;left:60vw}}
+@keyframes roam5{0%{top:40vh;left:40vw}25%{top:70vh;left:10vw}50%{top:15vh;left:65vw}75%{top:55vh;left:50vw}100%{top:40vh;left:40vw}}
 
 /* ---------- LAYER 3, GRAIN ---------- */
 #grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;
@@ -122,8 +122,7 @@ header#bar{position:sticky;top:0;z-index:60;height:var(--bar-h);
   box-shadow:0 8px 26px -18px rgba(60,92,104,.7),inset 0 -1px 0 rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.9)}
 header#bar::after{display:none}
 .mark{display:flex;align-items:center;gap:var(--s2);flex:0 0 auto}
-.mark img{height:26px;width:auto;display:block;animation:breathe 7s var(--ease-liquid) infinite}
-@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07) rotate(-2deg)}}
+.mark img{height:26px;width:auto;display:block}
 .mark span{font-family:var(--body);font-weight:700;font-size:var(--t-label);letter-spacing:.20em;
   text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
 .spacer{flex:1 1 auto}
@@ -199,8 +198,7 @@ strong{color:var(--ink);font-weight:700}
 
 /* ---------- COVER ---------- */
 .cover{text-align:center;padding:var(--s6) var(--s5) var(--s6)}
-.cover img{width:260px;max-width:62%;margin:0 auto var(--s5);display:block;
-  animation:breathe 9s var(--ease-liquid) infinite}
+.cover img{width:260px;max-width:62%;margin:0 auto var(--s5);display:block}
 .cover .eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-soft);margin-bottom:var(--s4)}
 .cover h1{font-size:var(--t-hero);margin-bottom:var(--s2)}
