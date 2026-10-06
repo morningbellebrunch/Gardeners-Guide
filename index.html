@@ -12,6 +12,9 @@
   try { t = localStorage.getItem('mb-theme'); } catch (e) {}
   if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', t);
+  /* Tell Safari the right bar color before first paint */
+  var c = t === 'dark' ? '#0b1a20' : '#f0f5f0';
+  document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute('content', c); });
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +86,8 @@
   *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   html { background-color:#f0f5f0; color-scheme:light; -webkit-text-size-adjust:100%; }
   html[data-theme="dark"] { background-color:#0b1a20; color-scheme:dark; }
+  body { background-color:#f0f5f0; }
+  html[data-theme="dark"] body { background-color:#0b1a20; }
   body { font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; color:var(--ink); -webkit-font-smoothing:antialiased; }
   ::selection { background:rgba(153,201,97,0.35); }
   :focus-visible { outline:2px solid var(--mb-teal); outline-offset:3px; }
@@ -311,14 +316,14 @@
   /* ===== SWIPE PAGER: chapters sit side by side, each scrolls on its own ===== */
   html, body { height:100%; overflow:hidden; overscroll-behavior:none; }
   .site-header { position:fixed; top:0; left:0; right:0; }
-  .pager { position:fixed; inset:0; height:100vh; height:100dvh; display:flex; overflow-x:auto; overflow-y:hidden;
+  .pager { position:fixed; top:0; left:0; right:0; height:100vh; height:100lvh; display:flex; overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
   .pager::-webkit-scrollbar { display:none; }
   .pager .page { display:block; flex:0 0 100%; width:100%; height:100%; overflow-y:auto; overflow-x:hidden;
     scroll-snap-align:start; scroll-snap-stop:always; overscroll-behavior-y:contain; scrollbar-width:none; }
   .pager .page::-webkit-scrollbar { display:none; }
   .page-inner { max-width:860px; margin:0 auto;
-    padding:calc(61px + env(safe-area-inset-top,0px) + var(--s6)) var(--s4) calc(120px + env(safe-area-inset-bottom,0px)); }
+    padding:calc(61px + env(safe-area-inset-top,0px) + var(--s6)) var(--s4) calc(120px + env(safe-area-inset-bottom,0px) + (100lvh - 100dvh)); }
 
   /* Entrance plays once, on the chapter the guide opens to */
   .page.intro .page-inner > * { opacity:0; transform:translateY(14px); animation:rise .6s var(--ease-out) forwards; }
@@ -799,7 +804,7 @@
   function apply(t) {
     root.setAttribute('data-theme', t);
     btn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#0d1c22' : '#f0f5f0');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#0b1a20' : '#f0f5f0');
     window.dispatchEvent(new Event('mb-theme'));
   }
   apply(root.getAttribute('data-theme') || 'light');
