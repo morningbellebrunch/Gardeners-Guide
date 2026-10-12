@@ -163,6 +163,23 @@
     box-shadow:inset 0 1.5px 1px rgba(255,255,255,0.35),0 3px 10px rgba(0,0,0,0.45); }
   html[data-theme="dark"] .theme-switch:active .theme-knob { left:29px; }
 
+
+  /* ===== HUB PILL: the way home, top left of every app ===== */
+  .hub-back { display:flex; align-items:center; min-height:44px; flex-shrink:0; text-decoration:none; -webkit-tap-highlight-color:transparent; }
+  .hub-pill { position:relative; isolation:isolate; display:flex; align-items:center; gap:3px; height:32px; padding:0 13px 0 8px; border-radius:999px;
+    font-size:12.5px; font-weight:700; letter-spacing:.01em; color:var(--ink);
+    background:linear-gradient(170deg,rgba(255,255,255,0.45),rgba(255,255,255,0.10)),var(--glass-tint);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:var(--glass-edge),0 4px 12px rgba(40,70,84,0.10);
+    transition:transform .42s var(--ease-liquid); }
+  .hub-pill svg { width:16px; height:16px; color:var(--mb-green); transition:transform .42s var(--ease-liquid); }
+  html[data-theme="dark"] .hub-pill { background:rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .hub-pill svg { color:#b9e08a; }
+  .hub-back:hover .hub-pill svg { transform:translateX(-3px); }
+  .hub-back:active .hub-pill { transform:scale(.92); transition-duration:.16s; }
+  .hub-back:focus-visible { outline:none; }
+  .hub-back:focus-visible .hub-pill { outline:2px solid var(--mb-teal); outline-offset:3px; }
+
   /* ===== 4. PAGE + HERO ===== */
   .page-wrap { max-width:860px; margin:0 auto; padding:1.25rem 1.25rem calc(120px + env(safe-area-inset-bottom,0px)); }
   .hero { text-align:center; padding:2rem 1rem 1.2rem; }
@@ -487,7 +504,9 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="header-logo">🌱</div>
+    <a class="hub-back" id="hubBack" href="https://morningbellebrunch.github.io/manager-hub/" aria-label="Back to the Manager Hub">
+      <span class="hub-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Hub</span>
+    </a>
     <div>
       <div class="header-name">Gardener's Guide</div>
       <div class="header-sub">Morning Belle</div>
@@ -983,6 +1002,19 @@
     });
   });
 
+})();
+</script>
+<script>
+/* Hub pill: step back if we came from the hub, so it opens where the manager left it. Otherwise open it fresh. */
+(function () {
+  var HUB = 'https://morningbellebrunch.github.io/manager-hub/';
+  var a = document.getElementById('hubBack');
+  if (!a) return;
+  a.href = HUB;
+  a.addEventListener('click', function (e) {
+    var ref = document.referrer || '';
+    if (ref.indexOf(HUB) === 0 && history.length > 1) { e.preventDefault(); history.back(); }
+  });
 })();
 </script>
 </body>
